@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+option go_package="github.com/zwczou/rubikpb/proto/rbkpb";
+
+import "enum.proto";
+
+package rbkpb;
+
+message Symbol {
+  enum SymbolType {
+    TYPE_NONE = 0;
+    TYPE_SPOT = 1;
+    TYPE_FUTURES = 2;
+  }
+
+  enum FutureType {
+    TYPE_NONE = 0;
+    THIS_WEEK = 1;
+    NEXT_WEEK = 2;
+    THIS_QUARTER = 3;
+    NEXT_QUARTER = 4;
+  }
+
+  SymbolType type = 1;
+  FutureType future_type = 2;
+  string name = 3;
+  string base = 4;
+  string quote = 5;
+  string underlying = 6;
+  string contract = 7;
+  double contract_val = 8;
+  double tick_size = 10;
+  double step_size = 11;
+  double max_qty = 12;
+  bool is_inverse = 13;
+  bool trading = 14;
+  double max_leverage = 15;
+  int64 delivery_at = 16;
+  int64 listing_at = 17;
+}
+
+
+message Ticker {
+  string exchange = 1;
+  string symbol = 2;
+  double open = 3;
+  double high = 4;
+  double low = 5;
+  double last = 6;
+  double ask = 7;
+  double bid = 8;
+  double ask_size = 9;
+  double bid_size = 10;
+  double volume = 11;
+  double quote_volume = 12;
+  int64 time = 13; // ms
+}
+
+
+message Candle {
+  string exchange = 1;
+  string symbol = 2;
+  string period = 3;
+  double open = 4;
+  double high = 5;
+  double low = 6;
+  double close = 7;
+  double volume = 8;
+  double quote_volume = 9;
+  uint32 count = 10;
+  uint32 time = 11; // s
+}

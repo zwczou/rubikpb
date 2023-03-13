@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+option go_package="github.com/zwczou/rubikpb/proto/rkbpb";
+
+import "enum.proto";
+import "model.proto";
+
+
+package rbkpb;
+
+
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "TICK服务"
+    version: "v1.0.0";
+  };
+  schemes: HTTP;
+  consumes: "application/json"
+  produces: "application/json"
+};
+
+
+service TickService {
+  // 获取支持的交易所
+  rpc ListExchange(google.protobuf.Empty) returns (ExchangeResponse) {
+    option (google.api.http) = {
+      get: "/v1/exchanges"
+    };
+  }
+
+  // 获取交易所交易对
+  rpc ListSymbol(ListSymbolRequest) returns (ListSymbolResponse) {
+    option (google.api.http) = {
+      get: "/v1/symbols"
+    };
+  }
+
+  // 订阅更新
+  rpc Subscribe(stream SubscribeRequest) returns (stream SubscribeResponse) {
+    option (google.api.http) = {
+      get: "/v1/subscribe"
+    };
+  }
+}
+
+message ExchangeResponse {
+  repeated string exchanges = 1;
+}
+
+message ListSymbolRequest {
+  string exchange = 1;
+}
+
+message ListSymbolResponse {
+  repeated Symbol symbols = 1;
+}
+
+message SubscribeRequest {
+  string op = 1;
+  repeated string topics = 2;
+}
+
+message SubscribeResponse {
+  repeated Ticker tickers = 1;
+  repeated Candle candles = 2;
+}

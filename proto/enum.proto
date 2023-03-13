@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option go_package="github.com/zwczou/rubikpb/proto/rbkpb";
+
+package rbkpb;
+
+
+message Error {
+  enum Code {
+    ERR_OK = 0;
+    ERR_NOT_FOUND = 1;
+    ERR_METHOD_NOT_ALLOWED = 2;
+    ERR_INTERNAL_SERVER = 3;
+    ERR_UNAUTHORIZED = 4;
+    ERR_FORBIDDEN = 5;
+    ERR_RATE_LIMIT = 6;
+    ERR_ILLEGAL_ACCESS = 7;
+    ERR_DATABASE = 8;
+    ERR_INVALID_ARGS = 9;
+    ERR_INVALID_METHOD = 10;
+  }
+
+  Code code = 1;
+  string message = 2;
+}
