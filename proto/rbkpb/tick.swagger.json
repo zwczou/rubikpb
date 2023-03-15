@@ -1,0 +1,376 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "TICK服务",
+    "version": "v1.0.0"
+  },
+  "tags": [
+    {
+      "name": "TickService"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/exchanges": {
+      "get": {
+        "summary": "获取支持的交易所",
+        "operationId": "TickService_ListExchange",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/rbkpbExchangeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "TickService"
+        ]
+      }
+    },
+    "/v1/subscribe": {
+      "get": {
+        "summary": "订阅更新",
+        "operationId": "TickService_Subscribe",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/rbkpbSubscribeResponse"
+                },
+                "error": {
+                  "$ref": "#/definitions/rpcStatus"
+                }
+              },
+              "title": "Stream result of rbkpbSubscribeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "op",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "topics",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "TickService"
+        ]
+      }
+    },
+    "/v1/symbols": {
+      "get": {
+        "summary": "获取交易所交易对",
+        "operationId": "TickService_ListSymbol",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/rbkpbListSymbolResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "exchange",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TickService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "SymbolFutureType": {
+      "type": "string",
+      "enum": [
+        "FUTURE_TYPE_NONE",
+        "THIS_WEEK",
+        "NEXT_WEEK",
+        "THIS_QUARTER",
+        "NEXT_QUARTER"
+      ],
+      "default": "FUTURE_TYPE_NONE"
+    },
+    "SymbolSymbolType": {
+      "type": "string",
+      "enum": [
+        "TYPE_NONE",
+        "TYPE_SPOT",
+        "TYPE_FUTURES"
+      ],
+      "default": "TYPE_NONE"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rbkpbCandle": {
+      "type": "object",
+      "properties": {
+        "exchange": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "period": {
+          "type": "string"
+        },
+        "open": {
+          "type": "number",
+          "format": "double"
+        },
+        "high": {
+          "type": "number",
+          "format": "double"
+        },
+        "low": {
+          "type": "number",
+          "format": "double"
+        },
+        "close": {
+          "type": "number",
+          "format": "double"
+        },
+        "volume": {
+          "type": "number",
+          "format": "double"
+        },
+        "quoteVolume": {
+          "type": "number",
+          "format": "double"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "time": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "rbkpbExchangeResponse": {
+      "type": "object",
+      "properties": {
+        "exchanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "rbkpbListSymbolResponse": {
+      "type": "object",
+      "properties": {
+        "symbols": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/rbkpbSymbol"
+          }
+        }
+      }
+    },
+    "rbkpbSubscribeResponse": {
+      "type": "object",
+      "properties": {
+        "tickers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/rbkpbTicker"
+          }
+        },
+        "candles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/rbkpbCandle"
+          }
+        }
+      }
+    },
+    "rbkpbSymbol": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SymbolSymbolType"
+        },
+        "futureType": {
+          "$ref": "#/definitions/SymbolFutureType"
+        },
+        "name": {
+          "type": "string"
+        },
+        "base": {
+          "type": "string"
+        },
+        "quote": {
+          "type": "string"
+        },
+        "underlying": {
+          "type": "string"
+        },
+        "contract": {
+          "type": "string"
+        },
+        "contractVal": {
+          "type": "number",
+          "format": "double"
+        },
+        "tickSize": {
+          "type": "number",
+          "format": "double"
+        },
+        "stepSize": {
+          "type": "number",
+          "format": "double"
+        },
+        "maxQty": {
+          "type": "number",
+          "format": "double"
+        },
+        "isInverse": {
+          "type": "boolean"
+        },
+        "trading": {
+          "type": "boolean"
+        },
+        "maxLeverage": {
+          "type": "number",
+          "format": "double"
+        },
+        "deliveryAt": {
+          "type": "string",
+          "format": "int64"
+        },
+        "listingAt": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "rbkpbTicker": {
+      "type": "object",
+      "properties": {
+        "exchange": {
+          "type": "string"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "open": {
+          "type": "number",
+          "format": "double"
+        },
+        "high": {
+          "type": "number",
+          "format": "double"
+        },
+        "low": {
+          "type": "number",
+          "format": "double"
+        },
+        "last": {
+          "type": "number",
+          "format": "double"
+        },
+        "ask": {
+          "type": "number",
+          "format": "double"
+        },
+        "bid": {
+          "type": "number",
+          "format": "double"
+        },
+        "askSize": {
+          "type": "number",
+          "format": "double"
+        },
+        "bidSize": {
+          "type": "number",
+          "format": "double"
+        },
+        "volume": {
+          "type": "number",
+          "format": "double"
+        },
+        "quoteVolume": {
+          "type": "number",
+          "format": "double"
+        },
+        "time": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
