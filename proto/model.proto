@@ -2,8 +2,6 @@ syntax = "proto3";
 
 option go_package="github.com/zwczou/rubikpb/proto/rbkpb";
 
-import "enum.proto";
-
 package rbkpb;
 
 message Symbol {
@@ -14,7 +12,7 @@ message Symbol {
   }
 
   enum FutureType {
-    TYPE_NONE = 0;
+    FUTURE_TYPE_NONE = 0;
     THIS_WEEK = 1;
     NEXT_WEEK = 2;
     THIS_QUARTER = 3;
