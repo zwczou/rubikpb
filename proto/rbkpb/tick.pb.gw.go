@@ -2,11 +2,11 @@
 // source: tick.proto
 
 /*
-Package rkbpb is a reverse proxy.
+Package rbkpb is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package rkbpb
+package rbkpb
 
 import (
 	"context"

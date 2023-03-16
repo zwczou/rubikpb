@@ -4,11 +4,10 @@
 // 	protoc        v3.19.4
 // source: tick.proto
 
-package rkbpb
+package rbkpb
 
 import (
 	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
-	rbkpb "github.com/zwczou/rubikpb/proto/rbkpb"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -123,7 +122,7 @@ type ListSymbolResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Symbols []*rbkpb.Symbol `protobuf:"bytes,1,rep,name=symbols,proto3" json:"symbols,omitempty"`
+	Symbols []*Symbol `protobuf:"bytes,1,rep,name=symbols,proto3" json:"symbols,omitempty"`
 }
 
 func (x *ListSymbolResponse) Reset() {
@@ -158,7 +157,7 @@ func (*ListSymbolResponse) Descriptor() ([]byte, []int) {
 	return file_tick_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *ListSymbolResponse) GetSymbols() []*rbkpb.Symbol {
+func (x *ListSymbolResponse) GetSymbols() []*Symbol {
 	if x != nil {
 		return x.Symbols
 	}
@@ -225,8 +224,8 @@ type SubscribeResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Tickers []*rbkpb.Ticker `protobuf:"bytes,1,rep,name=tickers,proto3" json:"tickers,omitempty"`
-	Candles []*rbkpb.Candle `protobuf:"bytes,2,rep,name=candles,proto3" json:"candles,omitempty"`
+	Tickers []*Ticker `protobuf:"bytes,1,rep,name=tickers,proto3" json:"tickers,omitempty"`
+	Candles []*Candle `protobuf:"bytes,2,rep,name=candles,proto3" json:"candles,omitempty"`
 }
 
 func (x *SubscribeResponse) Reset() {
@@ -261,14 +260,14 @@ func (*SubscribeResponse) Descriptor() ([]byte, []int) {
 	return file_tick_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *SubscribeResponse) GetTickers() []*rbkpb.Ticker {
+func (x *SubscribeResponse) GetTickers() []*Ticker {
 	if x != nil {
 		return x.Tickers
 	}
 	return nil
 }
 
-func (x *SubscribeResponse) GetCandles() []*rbkpb.Candle {
+func (x *SubscribeResponse) GetCandles() []*Candle {
 	if x != nil {
 		return x.Candles
 	}
@@ -327,7 +326,7 @@ var file_tick_proto_rawDesc = []byte{
 	0x62, 0x73, 0x63, 0x72, 0x69, 0x62, 0x65, 0x28, 0x01, 0x30, 0x01, 0x42, 0x67, 0x5a, 0x25, 0x67,
 	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x7a, 0x77, 0x63, 0x7a, 0x6f, 0x75,
 	0x2f, 0x72, 0x75, 0x62, 0x69, 0x6b, 0x70, 0x62, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x72,
-	0x6b, 0x62, 0x70, 0x62, 0x92, 0x41, 0x3d, 0x12, 0x14, 0x0a, 0x0a, 0x54, 0x49, 0x43, 0x4b, 0xe6,
+	0x62, 0x6b, 0x70, 0x62, 0x92, 0x41, 0x3d, 0x12, 0x14, 0x0a, 0x0a, 0x54, 0x49, 0x43, 0x4b, 0xe6,
 	0x9c, 0x8d, 0xe5, 0x8a, 0xa1, 0x32, 0x06, 0x76, 0x31, 0x2e, 0x30, 0x2e, 0x30, 0x2a, 0x01, 0x01,
 	0x32, 0x10, 0x61, 0x70, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2f, 0x6a, 0x73,
 	0x6f, 0x6e, 0x3a, 0x10, 0x61, 0x70, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2f,
@@ -353,9 +352,9 @@ var file_tick_proto_goTypes = []interface{}{
 	(*ListSymbolResponse)(nil), // 2: rbkpb.ListSymbolResponse
 	(*SubscribeRequest)(nil),   // 3: rbkpb.SubscribeRequest
 	(*SubscribeResponse)(nil),  // 4: rbkpb.SubscribeResponse
-	(*rbkpb.Symbol)(nil),       // 5: rbkpb.Symbol
-	(*rbkpb.Ticker)(nil),       // 6: rbkpb.Ticker
-	(*rbkpb.Candle)(nil),       // 7: rbkpb.Candle
+	(*Symbol)(nil),             // 5: rbkpb.Symbol
+	(*Ticker)(nil),             // 6: rbkpb.Ticker
+	(*Candle)(nil),             // 7: rbkpb.Candle
 	(*emptypb.Empty)(nil),      // 8: google.protobuf.Empty
 }
 var file_tick_proto_depIdxs = []int32{
@@ -380,6 +379,7 @@ func file_tick_proto_init() {
 	if File_tick_proto != nil {
 		return
 	}
+	file_model_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_tick_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ExchangeResponse); i {

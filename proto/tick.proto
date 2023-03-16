@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package="github.com/zwczou/rubikpb/proto/rkbpb";
+option go_package="github.com/zwczou/rubikpb/proto/rbkpb";
 
 import "model.proto";
 import "google/protobuf/empty.proto";
