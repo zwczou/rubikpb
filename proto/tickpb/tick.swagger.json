@@ -27,7 +27,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/rbkpbExchangeResponse"
+              "$ref": "#/definitions/tickpbListExchangeResponse"
             }
           },
           "default": {
@@ -53,13 +53,13 @@
               "type": "object",
               "properties": {
                 "result": {
-                  "$ref": "#/definitions/rbkpbSubscribeResponse"
+                  "$ref": "#/definitions/tickpbSubscribeResponse"
                 },
                 "error": {
                   "$ref": "#/definitions/rpcStatus"
                 }
               },
-              "title": "Stream result of rbkpbSubscribeResponse"
+              "title": "Stream result of tickpbSubscribeResponse"
             }
           },
           "default": {
@@ -100,7 +100,7 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/rbkpbListSymbolResponse"
+              "$ref": "#/definitions/tickpbListSymbolResponse"
             }
           },
           "default": {
@@ -197,45 +197,6 @@
         "time": {
           "type": "integer",
           "format": "int64"
-        }
-      }
-    },
-    "rbkpbExchangeResponse": {
-      "type": "object",
-      "properties": {
-        "exchanges": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "rbkpbListSymbolResponse": {
-      "type": "object",
-      "properties": {
-        "symbols": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/rbkpbSymbol"
-          }
-        }
-      }
-    },
-    "rbkpbSubscribeResponse": {
-      "type": "object",
-      "properties": {
-        "tickers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/rbkpbTicker"
-          }
-        },
-        "candles": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/rbkpbCandle"
-          }
         }
       }
     },
@@ -368,6 +329,45 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "tickpbListExchangeResponse": {
+      "type": "object",
+      "properties": {
+        "exchanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "tickpbListSymbolResponse": {
+      "type": "object",
+      "properties": {
+        "symbols": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/rbkpbSymbol"
+          }
+        }
+      }
+    },
+    "tickpbSubscribeResponse": {
+      "type": "object",
+      "properties": {
+        "tickers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/rbkpbTicker"
+          }
+        },
+        "candles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/rbkpbCandle"
           }
         }
       }

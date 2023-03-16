@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package="github.com/zwczou/rubikpb/proto/rbkpb";
+option go_package="github.com/zwczou/rubikpb/proto/tickpb";
 
 import "model.proto";
 import "google/protobuf/empty.proto";
@@ -8,7 +8,7 @@ import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 
-package rbkpb;
+package tickpb;
 
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
@@ -24,7 +24,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 
 service TickService {
   // 获取支持的交易所
-  rpc ListExchange(google.protobuf.Empty) returns (ExchangeResponse) {
+  rpc ListExchange(google.protobuf.Empty) returns (ListExchangeResponse) {
     option (google.api.http) = {
       get: "/v1/exchanges"
     };
@@ -45,7 +45,7 @@ service TickService {
   }
 }
 
-message ExchangeResponse {
+message ListExchangeResponse {
   repeated string exchanges = 1;
 }
 
@@ -54,7 +54,7 @@ message ListSymbolRequest {
 }
 
 message ListSymbolResponse {
-  repeated Symbol symbols = 1;
+  repeated rbkpb.Symbol symbols = 1;
 }
 
 message SubscribeRequest {
@@ -63,6 +63,6 @@ message SubscribeRequest {
 }
 
 message SubscribeResponse {
-  repeated Ticker tickers = 1;
-  repeated Candle candles = 2;
+  repeated rbkpb.Ticker tickers = 1;
+  repeated rbkpb.Candle candles = 2;
 }

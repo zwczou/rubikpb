@@ -18,6 +18,7 @@ message Error {
     ERR_DATABASE = 8;
     ERR_INVALID_ARGS = 9;
     ERR_INVALID_METHOD = 10;
+    ERR_INVALID_EXCHANGE = 11;
   }
 
   Code code = 1;

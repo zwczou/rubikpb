@@ -2,11 +2,11 @@
 // source: tick.proto
 
 /*
-Package rbkpb is a reverse proxy.
+Package tickpb is a reverse proxy.
 
 It translates gRPC into RESTful JSON APIs.
 */
-package rbkpb
+package tickpb
 
 import (
 	"context"
@@ -141,7 +141,7 @@ func RegisterTickServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/rbkpb.TickService/ListExchange", runtime.WithHTTPPathPattern("/v1/exchanges"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/tickpb.TickService/ListExchange", runtime.WithHTTPPathPattern("/v1/exchanges"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -164,7 +164,7 @@ func RegisterTickServiceHandlerServer(ctx context.Context, mux *runtime.ServeMux
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/rbkpb.TickService/ListSymbol", runtime.WithHTTPPathPattern("/v1/symbols"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/tickpb.TickService/ListSymbol", runtime.WithHTTPPathPattern("/v1/symbols"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -233,7 +233,7 @@ func RegisterTickServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/rbkpb.TickService/ListExchange", runtime.WithHTTPPathPattern("/v1/exchanges"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/tickpb.TickService/ListExchange", runtime.WithHTTPPathPattern("/v1/exchanges"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -253,7 +253,7 @@ func RegisterTickServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/rbkpb.TickService/ListSymbol", runtime.WithHTTPPathPattern("/v1/symbols"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/tickpb.TickService/ListSymbol", runtime.WithHTTPPathPattern("/v1/symbols"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -273,7 +273,7 @@ func RegisterTickServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/rbkpb.TickService/Subscribe", runtime.WithHTTPPathPattern("/v1/subscribe"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/tickpb.TickService/Subscribe", runtime.WithHTTPPathPattern("/v1/subscribe"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
