@@ -273,7 +273,7 @@ func RegisterTickServiceHandlerClient(ctx context.Context, mux *runtime.ServeMux
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/tickpb.TickService/Subscribe", runtime.WithHTTPPathPattern("/v1/subscribe"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/tickpb.TickService/Subscribe", runtime.WithHTTPPathPattern("/v1/stream"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -297,7 +297,7 @@ var (
 
 	pattern_TickService_ListSymbol_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "symbols"}, ""))
 
-	pattern_TickService_Subscribe_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "subscribe"}, ""))
+	pattern_TickService_Subscribe_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "stream"}, ""))
 )
 
 var (

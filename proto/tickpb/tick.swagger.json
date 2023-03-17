@@ -42,7 +42,7 @@
         ]
       }
     },
-    "/v1/subscribe": {
+    "/v1/stream": {
       "get": {
         "summary": "订阅更新",
         "operationId": "TickService_Subscribe",
